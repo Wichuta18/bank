@@ -76,7 +76,11 @@ class Transaction {
             $stmt->execute(array(":from" => $from));
             $availableAmount = (int) $stmt->fetchColumn();
             $stmt->closeCursor();
- 
+            
+            if ($availableAmount < 0){
+                return $rollBack ; 
+            }
+
             // ---> to do here ***************
  
             // commit the transaction
